@@ -25,4 +25,3 @@ yarn.lock
 storage/
 storage/*.key
 /docker-compose-collection/
-/resources/themes/velocity/*
