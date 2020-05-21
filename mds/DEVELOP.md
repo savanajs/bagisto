@@ -153,6 +153,12 @@ Please don't disclose security vulnerabilities publicly. If you find any securit
 
 Although, mailer environment variables are also required to be set up as **Bagisto** requires emails to send to customers and admins for various functionalities that are built in.
 
+Atualizar a estrutura de novas tabelas
+
+~~~
+0. php artisan migrate
+~~~
+
 ~~~
 1. php artisan db:seed
 ~~~
