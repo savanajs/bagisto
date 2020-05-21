@@ -318,6 +318,8 @@ return [
                     'individual-refund' => 'Terugbetaling #:refund_id',
                     'adjustment-refund' => 'Aanpassing restitutie',
                     'adjustment-fee' => 'Aanpassingskosten',
+                    'tracking-number' => 'Volg nummer',
+                    'cancel-confirm-msg' => 'Weet u zeker dat u deze bestelling wilt annuleren ?'
                 ]
             ],
 
@@ -373,6 +375,7 @@ return [
         'layered-nav-title' => 'Winkelen per ',
         'price-label' => 'Zo laag als',
         'remove-filter-link-title' => 'Wis alles',
+        'filter-to' => 'tot',
         'sort-by' => 'Sorteer op',
         'from-a-z' => 'Van A-Z',
         'from-z-a' => 'Van Z-A',
@@ -416,7 +419,7 @@ return [
         'your-customization' => 'Uw maatwerk',
         'total-amount' => 'Totale hoeveelheid',
         'none' => 'Geen',
-        'available' => 'Available'
+        'available-for-order' => 'Beschikbaar voor bestelling'
     ],
 
     // 'reviews' => [

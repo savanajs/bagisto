@@ -198,6 +198,8 @@ return [
             'already_added'         => 'Item already added to compare list',
             'removed'               => 'Item successfully removed from compare list',
             'empty-text'            => "You don't have any items in your compare list",
+            'product_image'         => 'Product Image',
+            'actions'               => 'Actions',
         ],
         'login-form'        => [
             'sign-up'               => 'Sign up',
@@ -284,6 +286,7 @@ return [
 
     'responsive'    => [
         'header' => [
+            'done'      => 'Done',
             'languages' => 'Languages',
             'greeting'  => 'Welcome, :customer !',
         ]
