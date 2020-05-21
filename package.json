@@ -1,6 +1,8 @@
 {
     "private": true,
     "scripts": {
+        "artisan": "php artisan serve",
+        "start": "concurrently \"npm run artisan\" \"npm run watch\"",
         "dev": "npm run development",
         "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
         "watch": "npm run development -- --watch",
@@ -22,7 +24,8 @@
         "sass": "^1.24.5",
         "sass-loader": "^8.0.2",
         "vue": "^2.6.11",
-        "vue-template-compiler": "^2.6.11"
+        "vue-template-compiler": "^2.6.11",
+        "concurrently": "^4.1.0"
     },
     "dependencies": {
         "opencollective": "^1.0.3",
