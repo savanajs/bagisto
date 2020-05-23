@@ -74,28 +74,36 @@
                     {!! view_render_event('bagisto.shop.layout.header.after') !!}
 
                     <div class="main-content-wrapper col-12 no-padding">
-                        @php
-                            $velocityContent = app('Webkul\Velocity\Repositories\ContentRepository')->getAllContents();
-                        @endphp
 
-                        <content-header
-                            url="{{ url()->to('/') }}"
-                            :header-content="{{ json_encode($velocityContent) }}"
-                            heading= "{{ __('velocity::app.menu-navbar.text-category') }}"
-                        ></content-header>
+                            @php
+                                $velocityContent = app('Webkul\Velocity\Repositories\ContentRepository')->getAllContents();
+                            @endphp
 
-                        <div class="">
-                            <div class="row col-12 remove-padding-margin">
-                                <sidebar-component
-                                    main-sidebar=true
-                                    id="sidebar-level-0"
-                                    url="{{ url()->to('/') }}"
-                                    category-count="{{ $velocityMetaData ? $velocityMetaData->sidebar_category_count : 10 }}"
-                                    add-class="category-list-container pt10">
-                                </sidebar-component>
+                            <nav class="menu-navigator">
+                                <div class="shell">
+                                    <content-header
+                                        url="{{ url()->to('/') }}"
+                                        :header-content="{{ json_encode($velocityContent) }}"
+                                        heading= "{{ __('velocity::app.menu-navbar.text-category') }}"
+                                    ></content-header>
 
-                                <div
-                                    class="col-12 no-padding content" id="home-right-bar-container">
+                                    <div class="">
+                                        <div class="row col-12 remove-padding-margin">
+                                            <sidebar-component
+                                                main-sidebar=true
+                                                id="sidebar-level-0"
+                                                url="{{ url()->to('/') }}"
+                                                category-count="{{ $velocityMetaData ? $velocityMetaData->sidebar_category_count : 10 }}"
+                                                add-class="category-list-container pt10">
+                                            </sidebar-component>
+                                        </div>
+                                    </div>
+                                </div>
+                            </nav>
+
+                            <div class="col-12 no-padding content" id="home-right-bar-container">
+
+                                <div class="shell">
 
                                     <div class="container-right row no-margin col-12 no-padding">
 
@@ -107,12 +115,12 @@
                                     </div>
 
                                 </div>
+
                             </div>
-                        </div>
                     </div>
                 @show
 
-                <div class="container">
+                <div class="wrap">
 
                     {!! view_render_event('bagisto.shop.layout.full-content.before') !!}
 

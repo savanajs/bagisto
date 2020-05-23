@@ -6,22 +6,43 @@
 
 @push('scripts')
     <script type="text/x-template" id="category-products-template">
-        <div class="container-fluid remove-padding-margin">
-            <shimmer-component v-if="isLoading && !isMobileView"></shimmer-component>
+        <div class="remove-padding-margin">
+            <div class="shell rows-nm">
+                <shimmer-component v-if="isLoading && !isMobileView"></shimmer-component>
 
-            <template v-else-if="categoryProducts.length > 0">
-                <card-list-header
-                    :heading="categoryDetails.name"
-                    :view-all="`${this.baseUrl}/${categoryDetails.slug}`">
-                </card-list-header>
+                <template v-else-if="categoryProducts.length > 0">
+                    <card-list-header
+                        :heading="categoryDetails.name"
+                        :view-all="`${this.baseUrl}/${categoryDetails.slug}`">
+                    </card-list-header>
 
-                <div class="carousel-products vc-full-screen ltr" v-if="!isMobileView">
-                    <carousel-component
-                        slides-per-page="6"
-                        navigation-enabled="hide"
-                        pagination-enabled="hide"
-                        :slides-count="categoryProducts.length"
-                        :id="`${categoryDetails.name}-carousel`">
+                    <div class="carousel-products vc-full-screen ltr" v-if="!isMobileView">
+                        <carousel-component
+                            slides-per-page="6"
+                            navigation-enabled="hide"
+                            pagination-enabled="hide"
+                            :slides-count="categoryProducts.length"
+                            :id="`${categoryDetails.name}-carousel`">
+
+                                <slide
+                                    :key="index"
+                                    :slot="`slide-${index}`"
+                                    v-for="(product, index) in categoryProducts">
+                                    <product-card
+                                        :list="list"
+                                        :product="product">
+                                    </product-card>
+                                </slide>
+                        </carousel-component>
+                    </div>
+
+                    <div class="carousel-products vc-small-screen" v-else>
+                        <carousel-component
+                            slides-per-page="2"
+                            navigation-enabled="hide"
+                            pagination-enabled="hide"
+                            :slides-count="categoryProducts.length"
+                            :id="`${categoryDetails.name}-carousel`">
 
                             <slide
                                 :key="index"
@@ -32,30 +53,10 @@
                                     :product="product">
                                 </product-card>
                             </slide>
-                    </carousel-component>
-                </div>
-
-                <div class="carousel-products vc-small-screen" v-else>
-                    <carousel-component
-                        slides-per-page="2"
-                        navigation-enabled="hide"
-                        pagination-enabled="hide"
-                        :slides-count="categoryProducts.length"
-                        :id="`${categoryDetails.name}-carousel`">
-
-                        <slide
-                            :key="index"
-                            :slot="`slide-${index}`"
-                            v-for="(product, index) in categoryProducts">
-                            <product-card
-                                :list="list"
-                                :product="product">
-                            </product-card>
-                        </slide>
-                    </carousel-component>
-                </div>
-            </template>
-
+                        </carousel-component>
+                    </div>
+                </template>
+            </div>
         </div>
     </script>
 

@@ -16,34 +16,36 @@
             $isRendered = true;
         @endphp
 
-        <div class="container-fluid advertisement-one">
-            <div class="row">
-            <div
-                class="col offers-lt-panel bg-image"
-                style="background-image: url('{{ asset('/storage/' . $advertisementOne['image_1']) }}')">
-            </div>
-
-                <div class="col offers-ct-panel">
-
-                    <div class="row pb10">
-                        <div
-                            class="col-12 offers-ct-top"
-                            style="background-image: url('{{ asset('/storage/' . $advertisementOne['image_2']) }}')">
-                        </div>
+        <div class="advertisement-one">
+            <div class="shell rows-nm">
+                <div class="row">
+                    <div
+                        class="col offers-lt-panel bg-image"
+                        style="background-image: url('{{ asset('/storage/' . $advertisementOne['image_1']) }}')">
                     </div>
 
-                    <div class="row">
-                        <div
-                            class="col-12 offers-ct-bottom"
-                            style="background-image: url('{{ asset('/storage/' . $advertisementOne['image_3']) }}')">
+                    <div class="col offers-ct-panel">
+
+                        <div class="row pb10">
+                            <div
+                                class="col-12 offers-ct-top"
+                                style="background-image: url('{{ asset('/storage/' . $advertisementOne['image_2']) }}')">
+                            </div>
                         </div>
+
+                        <div class="row">
+                            <div
+                                class="col-12 offers-ct-bottom"
+                                style="background-image: url('{{ asset('/storage/' . $advertisementOne['image_3']) }}')">
+                            </div>
+                        </div>
+
                     </div>
 
-                </div>
-
-                <div
-                    class="col offers-rt-panel"
-                    style="background-image: url('{{ asset('/storage/' . $advertisementOne['image_4']) }}')">
+                    <div
+                        class="col offers-rt-panel"
+                        style="background-image: url('{{ asset('/storage/' . $advertisementOne['image_4']) }}')">
+                    </div>
                 </div>
             </div>
         </div>
@@ -52,22 +54,24 @@
 
 @if (! $isRendered)
     <div class="container-fluid advertisement-one">
-        <div class="row">
-            <div class="col offers-lt-panel bg-image"></div>
+        <div class="shell rows-nm">
+            <div class="row">
+                <div class="col offers-lt-panel bg-image"></div>
 
-            <div class="col offers-ct-panel">
+                <div class="col offers-ct-panel">
 
-                <div class="row pb10">
-                    <div class="col-12 offers-ct-top"></div>
+                    <div class="row pb10">
+                        <div class="col-12 offers-ct-top"></div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12 offers-ct-bottom"></div>
+                    </div>
+
                 </div>
 
-                <div class="row">
-                    <div class="col-12 offers-ct-bottom"></div>
-                </div>
-
+                <div class="col offers-rt-panel"></div>
             </div>
-
-            <div class="col offers-rt-panel"></div>
         </div>
     </div>
 @endif

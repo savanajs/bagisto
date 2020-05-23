@@ -5,6 +5,7 @@
 @import "components/UI";
 @import "components/app";
 @import "components/home";
+@import "components/header";
 @import "components/footer";
 @import "components/shared";
 @import "components/product-view";
@@ -44,6 +45,21 @@
 
 *::-webkit-input-placeholder {
     font-family: $font-family-pro;
+}
+
+.shell {
+    width: 100%;
+    max-width: 1260px;
+    margin: 0 auto;
+    position: relative;
+    padding-left: 10px;
+    padding-right: 10px;
+
+    &.rows-nm {
+        > .row {
+            margin: 0px;
+        }
+    }
 }
 
 input[type=checkbox] {
