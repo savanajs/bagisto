@@ -67,6 +67,15 @@ Atualizar a estrutura de novas tabelas
 -> Caso tenha problemas no upload de imagens
 ~~~
 
+## New Provider
+
+Quando um provider novo for criado (Assim ele sera recolhecido)
+
+~~~
+composer dump-autoload
+php artisan vendor:publish // Digite 0 e enter
+~~~
+
 #### Install npm
 
 ```
@@ -93,3 +102,7 @@ yarn prod
 email:admin@example.com
 password:admin123
 ~~~
+
+## Email previews
+
+http://localhost:3000/emails/exemple.default

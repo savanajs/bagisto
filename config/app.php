@@ -269,6 +269,7 @@ return [
         Webkul\Velocity\Providers\VelocityServiceProvider::class,
         Webkul\BookingProduct\Providers\BookingProductServiceProvider::class,
         Webkul\DataFaker\Providers\DataFakerServiceProvider::class,
+        Bliss\View\Providers\ViewServiceProvider::class,
     ],
 
     /*

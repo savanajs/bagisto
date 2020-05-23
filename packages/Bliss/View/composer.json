@@ -1,0 +1,26 @@
+{
+    "name": "bagisto/laravel-view",
+    "license": "MIT",
+    "description" : "View package for store front",
+    "authors": [
+        {
+            "name": "Prashant Singh",
+            "email": "prashant.singh852@Bliss.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Bliss\\View\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Bliss\\View\\Providers\\ViewServiceProvider"
+            ],
+            "aliases": {}
+        }
+    },
+    "minimum-stability": "dev"
+}
