@@ -1,41 +1,56 @@
-let mix = require('laravel-mix');
-// const pkg = require('./package.json');
+const mix = require("laravel-mix");
 const ImageminPlugin = require('imagemin-webpack-plugin').default;
 const LiveReloadPlugin = require('webpack-livereload-plugin');
 
-const theme = 'themes/velocity';
+require("laravel-mix-merge-manifest");
 
-/*
- |--------------------------------------------------------------------------
- | Mix Asset Management
- |--------------------------------------------------------------------------
- |
- | Mix provides a clean, fluent API for defining some Webpack build steps
- | for your Laravel application. By default, we are compiling the Sass
- | file for the application as well as bundling up all the JS files.
- |
- */
+var storename = 'velocity'
+var theme = 'themes/' + storename;
+var publicPath = "./public/" + theme + "/assets";
+var dirname = "resources/" + theme;
 
-mix.js('resources/' + theme + '/assets/js/app.js', 'public/'+ theme +'/assets/js')
-   .sass('resources/'+ theme +'/assets/sass/app.scss', 'public/'+ theme +'/assets/css');
+if (mix.inProduction()) {
+    publicPath = 'publishable/assets';
+}
 
-mix.browserSync('http://localhost:8000');
-
-// http://localhost:3000
-
-mix.webpackConfig( {
-    plugins: [
-        new LiveReloadPlugin(),
-        new ImageminPlugin( {
-//            disable: process.env.NODE_ENV !== 'production', // Disable during development
-            pngquant: {
-                quality: '95-100',
-            },
-            test: /\.(jpe?g|png|gif|svg)$/i,
-        } ),
-    ],
-});
-
-mix.copy('resources/'+ theme +'/assets/images', 'public/'+ theme +'/assets/images', false );
-
+mix.setPublicPath(publicPath).mergeManifest();
 mix.disableNotifications();
+
+mix
+    .js(
+        dirname + "/assets/js/app.js",
+        publicPath + "/js/velocity.js"
+    )
+
+    .sass(
+        dirname + '/assets/sass/app.scss',
+        'css/velocity.css'
+    )
+
+    .options({
+        processCssUrls: false
+    })
+
+    .browserSync('http://localhost:8000')
+
+    // http://localhost:3000
+
+    // .webpackConfig( {
+    //     plugins: [
+    //         new LiveReloadPlugin(),
+    //         new ImageminPlugin( {
+    // //            disable: process.env.NODE_ENV !== 'production', // Disable during development
+    //             pngquant: {
+    //                 quality: '95-100',
+    //             },
+    //             test: /\.(jpe?g|png|gif|svg)$/i,
+    //         } ),
+    //     ],
+    // })
+
+    // .copy(dirname + '/assets/images', 'public/'+ theme +'/assets/images', false )
+    .disableNotifications();
+
+if (mix.inProduction()) {
+    mix.version();
+}
