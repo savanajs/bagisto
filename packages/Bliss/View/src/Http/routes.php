@@ -9,6 +9,6 @@ Route::group(['middleware' => ['web', 'locale', 'theme', 'currency']], function 
         'view' => 'shop::emails.'
     ]);
 
-    Route::fallback('Bliss\View\Http\Controllers\ViewController@notFound');
+    // Route::fallback('Bliss\View\Http\Controllers\ViewController@notFound');
 
 });

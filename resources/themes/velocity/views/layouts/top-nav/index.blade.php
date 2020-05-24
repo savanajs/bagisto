@@ -5,7 +5,7 @@
         </div>
 
         <div class="col-sm-6">
-            @include('velocity::layouts.top-nav.login-section')
+
         </div>
     </div>
 </nav>

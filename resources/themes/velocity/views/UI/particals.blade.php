@@ -8,7 +8,6 @@
         <div class="mini-cart-content">
             <i class="material-icons-outlined text-down-3">shopping_cart</i>
             <span class="badge" v-text="itemCount" v-if="itemCount != 0"></span>
-            <span class="fs18 fw6 cart-text">{{ __('velocity::app.minicart.cart') }}</span>
         </div>
         <div class="down-arrow-container">
             <span class="rango-arrow-down"></span>
@@ -45,7 +44,7 @@
 
 <script type="text/x-template" id="logo-template">
     <a
-        :class="`left ${addClass}`"
+        :class="`${addClass}`"
         href="{{ route('shop.home.index') }}">
 
         @if ($logo = core()->getCurrentChannel()->logo_url)
@@ -57,8 +56,8 @@
 </script>
 
 <script type="text/x-template" id="searchbar-template">
-    <div class="row no-margin right searchbar">
-        <div class="col-lg-6 col-md-12 no-padding input-group">
+    <div class="col-lg-6 col-md-12 no-padding searchbar">
+        <div class="input-group">
             <form
                 method="GET"
                 role="search"
@@ -69,7 +68,7 @@
                     class="btn-toolbar full-width"
                     role="toolbar">
 
-                    <div class="btn-group full-width">
+                    <div class="btn-group">
                         <div class="selectdiv">
                             <select class="form-control fs13 styled-select" name="category" @change="focusInput($event)">
                                 <option value="">
@@ -115,8 +114,13 @@
 
             </form>
         </div>
+    </div>
+</script>
 
-        <div class="col-6">
+<script type="text/x-template" id="actionsbar-template">
+    <div class="col-lg-2 col-md-12 no-padding actionsbar">
+        <div>
+
             {!! view_render_event('bagisto.shop.layout.header.cart-item.before') !!}
                 @include('shop::checkout.cart.mini-cart')
             {!! view_render_event('bagisto.shop.layout.header.cart-item.after') !!}
@@ -131,23 +135,24 @@
                     @guest('customer')
                         href="{{ route('velocity.product.compare') }}"
                     @endguest
+
+                    title="{{ __('velocity::app.customer.compare.text') }}"
+
                     >
 
                     <i class="material-icons">compare_arrows</i>
                     <div class="badge-container" v-if="compareCount > 0">
                         <span class="badge" v-text="compareCount"></span>
                     </div>
-                    <span>{{ __('velocity::app.customer.compare.text') }}</span>
                 </a>
             {!! view_render_event('bagisto.shop.layout.header.compare.after') !!}
 
             {!! view_render_event('bagisto.shop.layout.header.wishlist.before') !!}
-                <a class="wishlist-btn unset" :href="`${isCustomer ? '{{ route('customer.wishlist.index') }}' : '{{ route('velocity.product.guest-wishlist') }}'}`">
+                <a class="wishlist-btn unset" title="{{ __('shop::app.layouts.wishlist') }}" :href="`${isCustomer ? '{{ route('customer.wishlist.index') }}' : '{{ route('velocity.product.guest-wishlist') }}'}`">
                     <i class="material-icons">favorite_border</i>
                     <div class="badge-container" v-if="wishlistCount > 0">
                         <span class="badge" v-text="wishlistCount"></span>
                     </div>
-                    <span>{{ __('shop::app.layouts.wishlist') }}</span>
                 </a>
             {!! view_render_event('bagisto.shop.layout.header.wishlist.after') !!}
         </div>
@@ -258,6 +263,70 @@
 
         Vue.component('searchbar-component', {
             template: '#searchbar-template',
+            data: function () {
+                return {
+                    compareCount: 0,
+                    wishlistCount: 0,
+                    searchedQuery: [],
+                    isCustomer: '{{ auth()->guard('customer')->user() ? "true" : "false" }}' == "true",
+                }
+            },
+
+            watch: {
+                '$root.headerItemsCount': function () {
+                    this.updateHeaderItemsCount();
+                }
+            },
+
+            created: function () {
+                let searchedItem = window.location.search.replace("?", "");
+                searchedItem = searchedItem.split('&');
+
+                let updatedSearchedCollection = {};
+
+                searchedItem.forEach(item => {
+                    let splitedItem = item.split('=');
+                    updatedSearchedCollection[splitedItem[0]] = splitedItem[1];
+                });
+
+                this.searchedQuery = updatedSearchedCollection;
+
+                this.updateHeaderItemsCount();
+            },
+
+            methods: {
+                'focusInput': function (event) {
+                    $(event.target.parentElement.parentElement).find('input').focus();
+                },
+
+                'updateHeaderItemsCount': function () {
+                    if (! this.isCustomer) {
+                        let comparedItems = this.getStorageValue('compared_product');
+                        let wishlistedItems = this.getStorageValue('wishlist_product');
+
+                        if (wishlistedItems) {
+                            this.wishlistCount = wishlistedItems.length;
+                        }
+
+                        if (comparedItems) {
+                            this.compareCount = comparedItems.length;
+                        }
+                    } else {
+                        this.$http.get(`${this.$root.baseUrl}/items-count`)
+                            .then(response => {
+                                this.compareCount = response.data.compareProductsCount;
+                                this.wishlistCount = response.data.wishlistedProductsCount;
+                            })
+                            .catch(exception => {
+                                console.log(this.__('error.something_went_wrong'));
+                            });
+                    }
+                }
+            }
+        });
+
+        Vue.component('actionsbar-component', {
+            template: '#actionsbar-template',
             data: function () {
                 return {
                     compareCount: 0,

@@ -8,14 +8,17 @@
 
             <div class="welcome-content pull-right" @click="togglePopup">
                 <i class="material-icons align-vertical-top">perm_identity</i>
-                <span class="text-center">
-                    @guest('customer')
-                        {{ __('velocity::app.header.welcome-message', ['customer_name' => trans('velocity::app.header.guest')]) }}!
-                    @endguest
+                <span class="welcome-content__user">
+                    <p class="welcome-content__text">Acessar</p>
+                    <p class="welcome-content__name">
+                        @guest('customer')
+                            {{ __('velocity::app.header.welcome-message', ['customer_name' => trans('velocity::app.header.guest')]) }}!
+                        @endguest
 
-                    @auth('customer')
-                        {{ __('velocity::app.header.welcome-message', ['customer_name' => auth()->guard('customer')->user()->first_name]) }}
-                    @endauth
+                        @auth('customer')
+                            {{ __('velocity::app.header.welcome-message', ['customer_name' => auth()->guard('customer')->user()->first_name]) }}
+                        @endauth
+                    </p>
                 </span>
                 <span class="select-icon rango-arrow-down"></span>
             </div>

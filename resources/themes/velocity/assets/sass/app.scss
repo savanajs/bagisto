@@ -126,12 +126,10 @@ body {
 }
 
 #top {
-    @include box-shadow(0 0 0 0 rgba(0, 0, 0, 0.24));
-
     margin: 0;
     min-height: 32px;
     color: $font-color;
-    border-bottom: 1px solid $border-common;
+    background-color: #f5f5f5;
 
     .btn {
         font-family: $font-family-pro;
@@ -197,72 +195,6 @@ body {
         color: $font-color;
     }
 
-    #account {
-        font-size: 14px;
-
-        .select-icon {
-            top: 0px;
-            left: 0px;
-            padding-left: 5px;
-        }
-
-        .welcome-content {
-            @extend .unselectable;
-
-            display: table;
-            min-width: 150px;
-            cursor: pointer;
-            text-align: right;
-            padding-top: 5px;
-
-
-            * {
-                display: table-cell;
-                vertical-align: middle;
-            }
-        }
-
-        + .account-modal {
-            @extend .modal-dialog;
-
-            top: 40px;
-            right: 10px;
-            z-index: 101;
-            height: max-content;
-            width: 290px !important;
-            position: absolute !important;
-
-            .theme-btn {
-                padding: .5rem .9rem;
-            }
-
-            .modal-footer {
-                justify-content: unset;
-            }
-
-            .modal-content {
-                top: 0;
-                padding: 0;
-
-                ul {
-                    li {
-                        &:hover {
-                            background-color: $border-light;
-                        }
-
-                        a {
-                            padding: 10px 20px;
-                        }
-
-                        &:last-child {
-                            margin-bottom: 5px;
-                        }
-                    }
-                }
-            }
-        }
-    }
-
     > div:last-child {
         height: 32px;
     }
@@ -295,6 +227,101 @@ body {
         .select-icon-container {
             .select-icon {
                 right: 0;
+            }
+        }
+    }
+}
+
+.welcome-header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 0px !important;
+}
+
+#account {
+    font-size: 14px;
+
+    .select-icon {
+        top: 0px;
+        left: 0px;
+        padding-left: 5px;
+
+        &:before {
+            margin-top: 16px;
+            display: block;
+        }
+    }
+
+    .welcome-content {
+        @extend .unselectable;
+
+        display: table;
+        min-width: 150px;
+        cursor: pointer;
+
+        display: flex;
+
+        i {
+            font-size: 32px;
+            color: $theme-color;
+            margin-right: 10px;
+            margin-top: 2px;
+        }
+
+        &__user {
+            text-transform: uppercase;
+            line-height: 16px;
+        }
+
+        &__text {
+            margin: 0px;
+            color: $font-color;
+        }
+
+        &__name {
+            margin: 0px;
+            font-weight: 900;
+            color: $black-color;
+        }
+    }
+
+    + .account-modal {
+        @extend .modal-dialog;
+
+        top: 40px;
+        right: 10px;
+        z-index: 101;
+        height: max-content;
+        width: 290px !important;
+        position: absolute !important;
+
+        .theme-btn {
+            padding: .5rem .9rem;
+        }
+
+        .modal-footer {
+            justify-content: unset;
+        }
+
+        .modal-content {
+            top: 0;
+            padding: 0;
+
+            ul {
+                li {
+                    &:hover {
+                        background-color: $border-light;
+                    }
+
+                    a {
+                        padding: 10px 20px;
+                    }
+
+                    &:last-child {
+                        margin-bottom: 5px;
+                    }
+                }
             }
         }
     }
@@ -418,16 +445,23 @@ header {
         height: 40px;
         margin: 5px 0px;
         background: $white-color;
+        width: 100%;
 
         * {
             height: 100%;
         }
 
+        .full-width {
+            width: 100%;
+            position: relative;
+        }
+
         .btn-group {
-            max-width: 550px;
+            width: 100%;
 
             .selectdiv {
                 width: 170px;
+                display: none;
 
                 .select-icon {
                     top: 9px;
@@ -444,7 +478,6 @@ header {
                 height: 100%;
                 cursor: pointer;
                 border-radius: 2px 0px 0px 2px;
-                border: 1px solid $theme-color;
                 border-right: 0;
                 font-family:"Source Sans Pro", sans-serif;
 
@@ -459,19 +492,24 @@ header {
         }
 
         input {
-            @include border-radius(0px);
+            @include border-radius(50px);
 
-            width: 380px;
+            width: 100%;
             height: 100%;
             font-size: 14px;
             padding: 0 10px;
             line-height: 20px;
             letter-spacing: 0;
-            border: 1px solid $theme-color;
-            border-left: 1px solid $border-common;
+            box-shadow: none;
+            border-width: 2px;
         }
 
         .btn {
+            position: absolute;
+            top: 0;
+            right: 0;
+            z-index: 9;
+
             &:hover {
                 text-decoration: none;
             }
@@ -490,17 +528,16 @@ header {
         #header-search-icon {
             min-width: 40px;
             border-radius: 0px 2px 2px 0px;
-            background-color: $theme-color;
 
             i {
-                color: $btn-text-color;
+                color: $text-color;
             }
         }
     }
 
     .mini-cart-container {
         height: 50px;
-        padding: 5px 17px;
+        padding: 5px 12px;
 
         #mini-cart {
             .mini-cart-content {
@@ -541,7 +578,7 @@ header {
             float: right;
             font-size: 18px;
             font-weight: 600;
-            padding: 10px 16px 6px 16px;
+            padding: 10px 12px 6px 12px;
 
             i {
                 margin-right: 5px;
@@ -555,12 +592,12 @@ header {
                 .badge {
                     @include border-radius(50%);
 
-                    top: -23px;
+                    top: -20px;
                     left: -15px;
                     padding: 4px;
                     min-width: 20px;
                     position: absolute;
-                    background: $button-primary-bg;
+                    background: $theme-color;
                 }
             }
 

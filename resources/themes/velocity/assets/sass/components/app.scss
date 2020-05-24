@@ -567,6 +567,7 @@
         outline: none;
         box-shadow: none;
         text-decoration: unset;
+        padding: .575rem .75rem;
 
         .badge {
             @include border-radius(50%);
@@ -576,7 +577,7 @@
             padding: 4px;
             min-width: 20px;
             position: absolute;
-            background: $button-primary-bg;
+            background: $theme-color;
         }
     }
 }
@@ -2264,11 +2265,15 @@
     margin-top: 8px;
 }
 
+.menu-navigator {
+    border-top: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
+}
+
 .vc-header {
     z-index: 10;
     margin: 0 !important;
     padding: 0 !important;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.16), 0 1px 3px rgba(0,0,0,0.23);
 }
 
 .new-products-recent {
