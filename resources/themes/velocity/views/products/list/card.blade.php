@@ -30,7 +30,7 @@
 
 {!! view_render_event('bagisto.shop.products.list.card.before', ['product' => $product]) !!}
     @if (isset($list) && $list)
-        <div class="col-12 lg-card-container list-card product-card row">
+        <div class="col-12 lg-card-container list-card product-card row card-blade">
             <div class="product-image">
                 <a
                     title="{{ $product->name }}"
@@ -44,14 +44,14 @@
 
             <div class="product-information">
                 <div>
-                    <div class="product-name">
+                    <h3 class="product-name">
                         <a
                             href="{{ route('shop.productOrCategory.index', $product->url_key) }}"
                             title="{{ $product->name }}" class="unset">
 
                             <span class="fs16">{{ $product->name }}</span>
                         </a>
-                    </div>
+                    </h3>
 
                     <div class="product-price">
                         @include ('shop::products.price', ['product' => $product])
@@ -93,7 +93,7 @@
             </a>
 
             <div class="card-body">
-                <div class="product-name col-12 no-padding">
+                <h3 class="product-name col-12 no-padding">
                     <a
                         href="{{ route('shop.productOrCategory.index', $product->url_key) }}"
                         title="{{ $product->name }}"
@@ -101,7 +101,7 @@
 
                         <span class="fs16">{{ $product->name }}</span>
                     </a>
-                </div>
+                </h3>
 
                 <div class="product-price fs16">
                     @include ('shop::products.price', ['product' => $product])

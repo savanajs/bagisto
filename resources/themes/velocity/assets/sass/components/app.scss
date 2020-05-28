@@ -231,11 +231,16 @@
 .product-card-new {
     // width: 19rem;
     border: none !important;
-    margin: 0 5px 10px 10px;
+
+    .product-image-container {
+        background-color: #f2f2f2;
+    }
 
     .product-image-container {
         max-height: 225px;
+        min-height: 225px;
         position: relative;
+        height: 100%;
 
         img {
             width: 100%;
@@ -274,15 +279,34 @@
 
         .product-name,
         .product-rating {
-            width: 15rem;
+            width: 100%;
             overflow: hidden;
             white-space: nowrap;
             text-overflow: ellipsis;
+            text-align: center;
+        }
+
+        .product-name a {
+            font-weight: 600;
+            color: $font-color;
         }
     }
 
     .product-price {
+        min-height: 54px;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        flex-direction: column;
+        width: 100%;
+        color: $theme-color;
+
         .sticker {
+            display: block;
+        }
+
+        span {
             display: block;
         }
     }
@@ -1601,6 +1625,7 @@
 
 .price-label {
     margin-right: 6px;
+    display: none !important;
 }
 
 .product-price {
@@ -1609,6 +1634,10 @@
     .price-from > span:not(:nth-child(2)) {
         font-size: 20px !important;
         font-weight: 600;
+    }
+
+    .special-price {
+        color: $theme-color;
     }
 
     .price-from {
@@ -1646,17 +1675,17 @@
 
     .regular-price {
         font-weight: 500;
-        margin-right: 10px;
         text-decoration: line-through;
+        color: #999
     }
 
     span {
         &.price-label {
-            font-size: 16px;
+            font-size: 12px;
         }
 
         &.final-price {
-            font-size: 24px;
+            font-size: 20px !important;
         }
     }
 }
@@ -1673,7 +1702,7 @@
         background: white;
 
         &.header-shadow {
-            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+            box-shadow: 0 2px 3px rgba(0, 0, 0, 0.10), 0 2px 3px rgba(0, 0, 0, 0.14);
         }
     }
 }
@@ -2137,6 +2166,7 @@
 
 .slides-container {
     position: relative;
+    width: 100%;
 
     .VueCarousel-pagination {
         bottom: 10px;
@@ -2158,18 +2188,25 @@
     }
 
     .VueCarousel {
+        width: 100%;
+
         .VueCarousel-inner {
             padding-top: 0;
 
             img {
                 width: 100%;
+                height: 355px;
+                border: none;
             }
         }
 
         .VueCarousel-slide {
+            width: 100%;
             position: relative;
             flex-basis: auto !important;
             flex-shrink: initial !important;
+            border: none;
+            background-color: #f2f2f2;
 
             .show-content {
                 top: 0;
@@ -2268,6 +2305,7 @@
 .menu-navigator {
     border-top: 1px solid #e5e5e5;
     border-bottom: 1px solid #e5e5e5;
+    margin-bottom: 14px;
 }
 
 .vc-header {
@@ -2369,6 +2407,11 @@
 
     .VueCarousel-slide {
         cursor: default;
+
+        .card {
+            margin-right: 7px;
+            margin-left: 7px;
+        }
     }
 }
 

@@ -556,7 +556,7 @@
 .product-card-new:hover,
 .lg-card-container:hover,
 .general-container:hover {
-    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.16), 0 2px 4px rgba(0,0,0,0.23);
 }
 
 .lg-card-container:hover {
@@ -752,24 +752,28 @@ a {
 
     .VueCarousel-inner {
         padding-top: 5px;
+        margin-bottom: 10px;
+        padding-left: 3px;
     }
 
     .VueCarousel-slide:nth-of-type(1) {
         .product-card-new {
-            margin-left: 5px;
+            margin-left: 0px;
         }
     }
 }
 
 .navigation-hide {
     .VueCarousel-navigation {
-        display: none;
+
     }
 }
 
 .pagination-hide {
     .VueCarousel-pagination {
-        display: none;
+        .VueCarousel-dot-container, button {
+            margin-top: 0px !important;
+        }
     }
 }
 

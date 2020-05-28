@@ -1,5 +1,5 @@
 <template>
-    <div class="col-12 lg-card-container list-card product-card row" v-if="list">
+    <div class="col-12 lg-card-container list-card product-card row product-card-vue" v-if="list">
         <div class="product-image">
             <a :title="product.name" :href="`${baseUrl}/${product.slug}`">
                 <img
@@ -49,7 +49,7 @@
         </a>
 
         <div class="card-body">
-            <div class="product-name col-12 no-padding">
+            <h3 class="product-name col-12 no-padding">
                 <a
                     class="unset"
                     :title="product.name"
@@ -57,9 +57,7 @@
 
                     <span class="fs16">{{ product.name }}</span>
                 </a>
-            </div>
-
-            <div class="product-price fs16" v-html="product.priceHTML"></div>
+            </h3>
 
             <div
                 class="product-rating col-12 no-padding"
@@ -71,9 +69,11 @@
                 </a>
             </div>
 
-            <div class="product-rating col-12 no-padding" v-else>
+            <div class="product-rating product-rating--empty col-12 no-padding" v-else>
                 <span class="fs14" v-text="product.firstReviewText"></span>
             </div>
+
+            <div class="product-price fs16" v-html="product.priceHTML"></div>
 
             <vnode-injector :nodes="getDynamicHTML(product.addToCartHtml)"></vnode-injector>
         </div>

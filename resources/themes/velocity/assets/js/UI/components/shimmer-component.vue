@@ -1,5 +1,6 @@
 <template>
     <div class="shimmer-card-container">
+        <div class="heading"><h2 class="fs20 fw6">&nbsp;</h2></div>
         <carousel-component
             id="shimmer-carousel"
             navigation-enabled="hide"
@@ -18,6 +19,8 @@
                             <div class="comment animate"></div>
                             <div class="comment animate"></div>
                             <div class="comment animate"></div>
+                            <div class="shimmer-product-price animate"></div>
+                            <div class="shimmer-product-btn animate"></div>
                         </div>
                     </div>
                 </slide>
@@ -29,7 +32,7 @@
     export default {
         props: {
             'shimmerCount': {
-                default: 6,
+                default: 5,
             },
         },
 
@@ -48,19 +51,28 @@
 
     .shimmer-card {
         margin: 0px 10px 50px 10px;
-        padding: 30px 40px;
-        border: 2px solid #fff;
-        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+        padding: 0px 0px 30px 0px;
     }
 
     .shimmer-product-image {
         width: 100%;
-        height: 180px;
+        height: 225px;
+    }
+
+    .shimmer-product-price {
+        width: 100%;
+        height: 14px;
+    }
+
+    .shimmer-product-btn {
+        width: 100%;
+        height: 38px;
+        margin-top: 14px;
     }
 
     .comment {
         height: 10px;
-        background: #777;
+        background: #f2f2f2;
         margin-top: 20px;
     }
 
@@ -77,7 +89,7 @@
 
     .animate {
         animation : shimmer 2s infinite;
-        background: linear-gradient(to right, #eff1f3 4%, #e2e2e2 25%, #eff1f3 36%);
+        background: linear-gradient(to right, #f2f2f2 4%, #e2e2e2 25%, #f2f2f2 36%);
         background-size: 1000px 100%;
     }
 
