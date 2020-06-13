@@ -18,7 +18,7 @@
 
                     <div class="carousel-products vc-full-screen ltr" v-if="!isMobileView">
                         <carousel-component
-                            slides-per-page="6"
+                            slides-per-page="5"
                             navigation-enabled="hide"
                             pagination-enabled="hide"
                             :slides-count="categoryProducts.length"

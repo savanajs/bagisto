@@ -189,9 +189,6 @@ class ProductRepository extends Repository
 
                                 $attributeQuery->where(function ($attributeValueQuery) use ($column, $filterInputValues) {
                                     foreach ($filterInputValues as $filterValue) {
-                                        if (!is_numeric($filterValue)) {
-                                            continue;
-                                        }
                                         $attributeValueQuery->orWhereRaw("find_in_set(?, {$column})", [$filterValue]);
                                     }
                                 });
@@ -349,7 +346,7 @@ class ProductRepository extends Repository
                             ->where('product_flat.channel', $channel)
                             ->where('product_flat.locale', $locale)
                             ->whereNotNull('product_flat.url_key')
-                            ->where(function($sub_query) use ($term) {  
+                            ->where(function($sub_query) use ($term) {
                                 $sub_query->where('product_flat.name', 'like', '%' . urldecode($term) . '%')
                                           ->orWhere('product_flat.short_description', 'like', '%' . urldecode($term) . '%');
                                 })

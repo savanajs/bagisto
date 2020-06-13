@@ -26,7 +26,7 @@
                             @endpush
 
                             <div class="row ltr">
-                                <div class="col-9 no-padding carousel-products vc-full-screen with-recent-viewed" v-if="!isMobileView">
+                                <div class="col-12 no-padding carousel-products vc-full-screen with-recent-viewed" v-if="!isMobileView">
                                     <carousel-component
                                         slides-per-page="5"
                                         navigation-enabled="hide"
@@ -65,11 +65,6 @@
                                         </slide>
                                     </carousel-component>
                                 </div>
-
-                                @include ('shop::products.list.recently-viewed', [
-                                    'quantity'          => 3,
-                                    'addClass'          => 'col-lg-3 col-md-12',
-                                ])
                             </div>
                         @else
                             <div class="carousel-products vc-full-screen" v-if="!isMobileView">
@@ -142,6 +137,8 @@
                         .then(response => {
                             if (response.data.status)
                                 this.newProducts = response.data.products;
+
+                            console.log("this.newProducts", this.newProducts)
 
                             this.isLoading = false;
                         })

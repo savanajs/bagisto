@@ -75,7 +75,7 @@ Route::group(['prefix' => 'api'], function ($router) {
             'resource' => 'Webkul\API\Http\Resources\Catalog\ProductReview',
             'authorization_required' => true
         ]);
-        
+
 
         //Channel routes
         Route::get('channels', 'ResourceController@index')->defaults('_config', [

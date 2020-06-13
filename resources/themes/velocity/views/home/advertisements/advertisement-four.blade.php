@@ -10,6 +10,8 @@
         if (isset($advertisement[4]) && is_array($advertisement[4])) {
             $advertisementFour = array_values(array_filter($advertisement[4]));
         }
+
+        $one = '/promocao';
     @endphp
 
     @if ($advertisementFour)
@@ -17,33 +19,41 @@
             $isRendered = true;
         @endphp
 
-        <div class="dvertisement-four-container">
+        <div class="advertisement-four-container">
             <div class="shell">
-                <div class="row">
-                    @if ( isset($advertisementFour[0]))
-                        <a @if (isset($one)) href="{{ $one }}" @endif class="col-lg-4 col-12 no-padding">
+                <div class="rows-nm">
+
+                    @if (isset($advertisementFour[0]))
+                    <div class="banner">
+                        <a @if (isset($one)) href="{{ $one }}" @endif >
                             <img class="col-12" src="{{ asset('/storage/' . $advertisementFour[0]) }}" />
                         </a>
+                    </div>
                     @endif
 
-                    <div class="col-lg-4 col-12 offers-ct-panel">
-                        @if ( isset($advertisementFour[1]))
-                            <a @if (isset($two)) href="{{ $two }}" @endif class="row col-12 remove-padding-margin">
-                                <img class="col-12 offers-ct-top" src="{{ asset('/storage/' . $advertisementFour[1]) }}" />
-                            </a>
-                        @endif
-
-                        @if ( isset($advertisementFour[2]))
-                            <a @if (isset($three)) href="{{ $three }}" @endif class="row col-12 remove-padding-margin">
-                                <img class="col-12 offers-ct-bottom" src="{{ asset('/storage/' . $advertisementFour[2]) }}" />
-                            </a>
-                        @endif
+                    @if ( isset($advertisementFour[1]))
+                    <div class="banner">
+                        <a @if (isset($two)) href="{{ $two }}" @endif class="row col-12 remove-padding-margin">
+                            <img class="col-12 offers-ct-top" src="{{ asset('/storage/' . $advertisementFour[1]) }}" />
+                        </a>
                     </div>
+                    @endif
+
+                    @if ( isset($advertisementFour[2]))
+                    <div class="banner">
+                        <a @if (isset($three)) href="{{ $three }}" @endif class="row col-12 remove-padding-margin">
+                            <img class="col-12 offers-ct-bottom" src="{{ asset('/storage/' . $advertisementFour[2]) }}" />
+                        </a>
+                    </div>
+                    @endif
+
 
                     @if ( isset($advertisementFour[3]))
-                        <a @if (isset($four)) href="{{ $four }}" @endif class="col-lg-4 col-12 no-padding">
+                    <div class="banner">
+                        <a @if (isset($four)) href="{{ $four }}" @endif >
                             <img class="col-12" src="{{ asset('/storage/' . $advertisementFour[3]) }}" />
                         </a>
+                    </div>
                     @endif
                 </div>
             </div>
@@ -55,7 +65,7 @@
     <div class="advertisement-four-container">
         <div class="shell rows-nm">
             <div class="row">
-                <a @if (isset($one)) href="{{ $one }}" @endif class="col-lg-4 col-12 no-padding">
+                <a @if (isset($one)) href="{{ $one }}" @endif >
                     <img class="col-12" src="{{ asset('/themes/velocity/assets/images/big-sale-banner.png') }}" />
                 </a>
 
@@ -68,7 +78,7 @@
                     </a>
                 </div>
 
-                <a @if (isset($four)) href="{{ $four }}" @endif class="col-lg-4 col-12 no-padding">
+                <a @if (isset($four)) href="{{ $four }}" @endif >
                     <img class="col-12" src="{{ asset('/themes/velocity/assets/images/kids.png') }}" />
                 </a>
             </div>

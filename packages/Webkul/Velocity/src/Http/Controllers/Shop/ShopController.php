@@ -25,10 +25,14 @@ class ShopController extends Controller
     {
         $product = $this->productRepository->findBySlug($slug);
 
+        $formattedProducts = [];
+
         if ($product) {
             $productReviewHelper = app('Webkul\Product\Helpers\Review');
 
             $galleryImages = $this->productImageHelper->getProductBaseImage($product);
+
+            array_push($formattedProducts, $this->velocityHelper->formatProduct($product));
 
             $response = [
                 'status'  => true,
@@ -39,7 +43,8 @@ class ShopController extends Controller
                     'totalReviews' => $productReviewHelper->getTotalReviews($product),
                     'rating'       => ceil($productReviewHelper->getAverageRating($product)),
                     'image'        => $galleryImages['small_image_url'],
-                ]
+                ],
+                'product' => $formattedProducts,
             ];
         } else {
             $response = [

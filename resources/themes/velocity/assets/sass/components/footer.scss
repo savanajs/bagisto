@@ -6,9 +6,18 @@
     .footer-content {
         .newsletter-subscription {
             color: white;
-            background-color: #4d7ea8;
+            background-color: #f5f5f5;
 
             .newsletter-wrapper {
+                display: flex;
+                align-items: center;
+
+                h4 {
+                    flex: 1;
+                    color: #000;
+                    font-size: 30px;
+                }
+
                 input.subscribe-field {
                     width: 300px;
                     border: none;
@@ -31,7 +40,8 @@
                 .social-icons {
                     height: 100%;
                     padding: 20px 0;
-                    color: $light-color;
+                    color: $font-color;
+                    font-size: 30px;
 
                     i {
                         margin: 0;

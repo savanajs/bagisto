@@ -1,16 +1,16 @@
 <template>
 
     <div :class="`row ${rowClass}`">
-        <div class="heading" v-if="tabs || viewAll || scrollable">
-            <h2 class="fs20 fw6">{{ headerHeading }}</h2>
+        <div class="heading col-10 no-padding" v-if="tabs || viewAll || scrollable">
+            <h2 class="fs20 fw6 mb15">{{ headerHeading }}</h2>
         </div>
 
-        <div class="heading" v-else >
-            <h2 class="fs20 fw6">{{ headerHeading }}</h2>
+        <div class="heading col-10 no-padding" v-else >
+            <h2 class="fs20 fw6 mb15">{{ headerHeading }}</h2>
         </div>
 
-        <div class="col-8 no-padding">
-            <div class="row justify-content-end text-right">
+        <div class="col-2 no-padding">
+            <div class="justify-content-end text-right">
 
                 <template v-if="tabs">
                     <div
@@ -46,7 +46,7 @@
                 <template v-if="(! (viewAll == 'false' || viewAll == '')) && viewAll">
                     <div>
                         <a :href="viewAll" :title="`View all ${headerHeading} products`" class="remove-decoration link-color">
-                            <h2 class="fs16 fw6 cursor-pointer tab">{{ __('home.view-all') }}</h2>
+                            <span class="fs16 fw6 cursor-pointer tab">{{ __('home.view-all') }}</span>
                         </a>
                     </div>
                 </template>
