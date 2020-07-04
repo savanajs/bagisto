@@ -221,10 +221,15 @@ $(document).ready(function () {
                 miniCartKey: 0,
                 quickView: false,
                 productDetails: [],
+                showPageLoader: false,
             }
         },
 
         created: function () {
+            setTimeout(() => {
+                document.body.classList.remove("modal-open");
+            }, 0);
+
             window.addEventListener('click', () => {
                 let modals = document.getElementsByClassName('sensitive-modal');
 
@@ -302,12 +307,6 @@ $(document).ready(function () {
             },
 
             addFlashMessages: function () {
-                // const flashes = this.$refs.flashes;
-
-                // flashMessages.forEach(function (flash) {
-                //     flashes.addFlash(flash);
-                // }, this);
-
                 if (window.flashMessages.alertMessage)
                     window.alert(window.flashMessages.alertMessage);
             },
@@ -337,6 +336,20 @@ $(document).ready(function () {
                     })
                 });
             },
+
+            showLoader: function () {
+                $('#loader').show();
+                $('.overlay-loader').show();
+                
+                document.body.classList.add("modal-open");
+            },
+
+            hideLoader: function () {
+                $('#loader').hide();
+                $('.overlay-loader').hide();
+
+                document.body.classList.remove("modal-open");
+            }
         }
     });
 

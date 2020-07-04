@@ -270,6 +270,7 @@ return [
         Webkul\BookingProduct\Providers\BookingProductServiceProvider::class,
         Webkul\DataFaker\Providers\DataFakerServiceProvider::class,
         Bliss\View\Providers\ViewServiceProvider::class,
+        Webkul\SocialLogin\Providers\SocialLoginServiceProvider::class,
     ],
 
     /*

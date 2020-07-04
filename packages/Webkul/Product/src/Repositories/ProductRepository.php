@@ -108,7 +108,14 @@ class ProductRepository extends Repository
     {
         $params = request()->input();
 
-        $perPage = isset($params['limit']) ? $params['limit'] : 9;
+        if (core()->getConfigData('catalog.products.storefront.products_per_page')) {
+            $pages = explode(',', core()->getConfigData('catalog.products.storefront.products_per_page'));
+
+            $perPage = isset($params['limit']) ? $params['limit'] : current($pages);
+        } else {
+            $perPage = isset($params['limit']) ? $params['limit'] : 9;
+        }
+
         $page = Paginator::resolveCurrentPage('page');
 
         $repository = app(ProductFlatRepository::class)->scopeQuery(function($query) use($params, $categoryId) {
@@ -158,7 +165,7 @@ class ProductRepository extends Repository
                 }
             }
 
-            if( $priceFilter = request('price') ){
+            if ( $priceFilter = request('price') ){
                 $priceRange = explode(',', $priceFilter);
                 if( count($priceRange) > 0 ) {
                     $qb->where('variants.min_price', '>=', core()->convertToBasePrice($priceRange[0]));
@@ -171,7 +178,7 @@ class ProductRepository extends Repository
                     request()->except(['price'])
                 ));
 
-            if( count($attributeFilters) > 0 ) {
+            if ( count($attributeFilters) > 0 ) {
                 $qb->where(function ($filterQuery) use($attributeFilters){
 
                     foreach ($attributeFilters as $attribute) {
@@ -217,7 +224,7 @@ class ProductRepository extends Repository
         $countQuery = "select count(*) as aggregate from ({$repository->model->toSql()}) c";
         $count = collect(DB::select($countQuery, $repository->model->getBindings()))->pluck('aggregate')->first();
 
-        if($count > 0) {
+        if ($count > 0) {
             # apply a new scope query to limit results to one page
             $repository->scopeQuery(function ($query) use ($page, $perPage) {
                 return $query->forPage($page, $perPage);
@@ -334,24 +341,61 @@ class ProductRepository extends Repository
      */
     public function searchProductByAttribute($term)
     {
-        $results = app(ProductFlatRepository::class)->scopeQuery(function($query) use($term) {
-            $channel = request()->get('channel') ?: (core()->getCurrentChannelCode() ?: core()->getDefaultChannelCode());
+        $channel = request()->get('channel') ?: (core()->getCurrentChannelCode() ?: core()->getDefaultChannelCode());
 
-            $locale = request()->get('locale') ?: app()->getLocale();
+        $locale = request()->get('locale') ?: app()->getLocale();
 
-            return $query->distinct()
+        if (config('scout.driver') == 'algolia') {
+            $results = app(ProductFlatRepository::class)->getModel()::search('query', function ($searchDriver, string $query, array $options) use($term, $channel, $locale) {
+                $queries = explode('_', $term);
+
+                $options['similarQuery'] = array_map('trim', $queries);
+
+                $searchDriver->setSettings([
+                    'attributesForFaceting' => [
+                    "searchable(locale)",
+                    "searchable(channel)"
+                    ]
+                ]);
+
+                $options['facetFilters'] = ['locale:' . $locale, 'channel:' .  $channel];
+
+                return $searchDriver->search($query, $options);
+            })
+            ->where('status', 1)
+            ->where('visible_individually', 1)
+            ->orderBy('product_id', 'desc')
+            ->paginate(16);
+        } else if(config('scout.driver') == 'elastic') {
+            $queries = explode('_', $term);
+
+            $results = app(ProductFlatRepository::class)->getModel()::search(implode(' OR ', $queries))
+                ->where('status', 1)
+                ->where('visible_individually', 1)
+                ->where('channel', $channel)
+                ->where('locale', $locale)
+                ->orderBy('product_id', 'desc')
+                ->paginate(16);
+        } else {
+            $results = app(ProductFlatRepository::class)->scopeQuery(function($query) use($term, $channel, $locale) {
+                return $query->distinct()
                             ->addSelect('product_flat.*')
                             ->where('product_flat.status', 1)
                             ->where('product_flat.visible_individually', 1)
                             ->where('product_flat.channel', $channel)
                             ->where('product_flat.locale', $locale)
                             ->whereNotNull('product_flat.url_key')
-                            ->where(function($sub_query) use ($term) {
-                                $sub_query->where('product_flat.name', 'like', '%' . urldecode($term) . '%')
-                                          ->orWhere('product_flat.short_description', 'like', '%' . urldecode($term) . '%');
-                                })
+                            ->where(function($subQuery) use ($term) {
+                                $queries = explode('_', $term);
+
+                                foreach (array_map('trim', $queries) as $value) {
+                                    $subQuery->orWhere('product_flat.name', 'like', '%' . urldecode($value) . '%')
+                                                ->orWhere('product_flat.short_description', 'like', '%' . urldecode($value) . '%');
+                                }
+                            })
                             ->orderBy('product_id', 'desc');
-        })->paginate(16);
+            })->paginate(16);
+        }
 
         return $results;
     }

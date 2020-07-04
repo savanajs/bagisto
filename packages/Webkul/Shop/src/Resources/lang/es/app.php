@@ -68,7 +68,8 @@ return [
         'no-results' => 'No hay resultados',
         'page-title' => 'Búsqueda',
         'found-results' => 'No hay resultados de búsqueda',
-        'found-result' => 'Resultados de la búsqueda'
+        'found-result' => 'Resultados de la búsqueda',
+        'analysed-keywords' => 'Analysed Keywords'
     ],
 
     'reviews' => [
@@ -377,6 +378,7 @@ return [
         'new' => 'Nuevo',
         'empty' => 'No hay prodcutos disponibles en esta categoría',
         'add-to-cart' => 'Añadir a la cesta',
+        'book-now' => 'reservar ahora',
         'buy-now' => 'Comprar ahora',
         'whoops' => 'Ups!',
         'quantity' => 'Cantidad',
@@ -386,6 +388,8 @@ return [
         'select-above-options' => 'Primero selecciona las opciones de arriba.',
         'less-quantity' => 'La cantidad no debe ser inferior a uno.',
         'available-for-order' => 'Disponible para ordenar',
+        'settings' => 'Settings',
+        'compare_options' => 'Compare Options',
     ],
 
     // 'reviews' => [
@@ -443,6 +447,7 @@ return [
             'shipping' => 'Envío',
             'payment' => 'Pago',
             'complete' => 'Completado',
+            'review' => 'revisión',
             'billing-address' => 'Dirección de facturación',
             'sign-in' => 'Entrar',
             'first-name' => 'Nombre',

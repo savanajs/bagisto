@@ -71,7 +71,8 @@ return [
         'no-results' => 'Keine Ergebnisse gefunden',
         'page-title' => config('app.name') . ' - Suchen',
         'found-results' => 'Suchergebnisse gefunden',
-        'found-result' => 'Suchergebnis gefunden'
+        'found-result' => 'Suchergebnis gefunden',
+        'analysed-keywords' => 'Analysed Keywords'
     ],
 
     'reviews' => [
@@ -393,6 +394,7 @@ return [
         'new' => 'Neu',
         'empty' => 'Keine Produkte in dieser Kategorie verfügbar',
         'add-to-cart' => 'In Warenkorb',
+        'book-now' => 'buchen Sie jetzt',
         'buy-now' => 'Jetzt kaufen',
         'whoops' => 'Hoppla!',
         'quantity' => 'Menge',
@@ -412,7 +414,9 @@ return [
         'your-customization' => 'Ihre Anpassung',
         'total-amount' => 'Gesamtmenge',
         'none' => 'Keine',
-        'available' => 'Verfügbar'
+        'available' => 'Verfügbar',
+        'settings' => 'Settings',
+        'compare_options' => 'Compare Options',
     ],
 
     // 'reviews' => [
@@ -471,6 +475,7 @@ return [
             'shipping' => 'Versand',
             'payment' => 'Zahlung',
             'complete' => 'Komplett',
+            'review' => 'Rezension',
             'billing-address' => 'Rechnungsadresse',
             'sign-in' => 'Anmelden',
             'company-name' => 'Name der Firma',
