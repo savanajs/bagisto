@@ -54,7 +54,7 @@ Atualizar a estrutura de novas tabelas
 ~~~
 
 ~~~
-1. php artisan db:seed
+1. php artisan db:seed (Atauliza as configurações basicas da loja)
 ~~~
 
 ~~~
